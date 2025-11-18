@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
-import Main from './pages/Main'
 import { Route, Routes } from 'react-router-dom'
+import Main from './pages/Main'
 import ProductDetails from './components/ProductDetails'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import CartPage from './pages/CartPage'
 import PageNotFound from './components/PageNotFound'
 import SignUpPage from './pages/SignUpPage'
-<<<<<<< HEAD
 import LoginPage from './pages/LoginPage'
 
 const App = () => { 
@@ -67,38 +66,11 @@ const App = () => {
     const newCart = { ...cart, [productId]: (cart[productId] || 0) + count }
     setCart(newCart)
     localStorage.setItem("my-cart", JSON.stringify(newCart))
-=======
-import LoginPage from './pages/LoginPage' // New import
-
-
-const App = () => { 
-    const savedDataString = localStorage.getItem("my-cart") || "{}";
-    const savedData = JSON.parse(savedDataString);
-    const [cart,setCart] = useState(savedData);
-    const hanldeAddToCart = function(productId,count){
-    count=+count;
-    let oldCount = cart[productId] || 0;
-    const newCart = {...cart, [productId]:oldCount+count};
-    updateCart(newCart);
-  };
-
-  function updateCart(newCart){
-    setCart(newCart);
-    localStorage.setItem("my-cart", JSON.stringify(newCart));
->>>>>>> 004533bdc89dd97841ca523386e422d5632461c8
   }
 
-
-
-  const totalCount= Object.keys(cart).reduce(function (output,current){
-    return output+cart[current];
-  },0);
-  console.log(cart);
-
-
+  const totalCount = Object.values(cart).reduce((sum, qty) => sum + qty, 0)
 
   return (
-<<<<<<< HEAD
     <div className="min-h-screen flex flex-col">
       <Header 
         productCount={totalCount} 
@@ -118,24 +90,6 @@ const App = () => {
         </Routes>
       </div>
       <Footer />
-=======
-    <div>
-    <>
-    <Header productCount={totalCount} />
-    <div className='grow'>
-      <Routes>
-      <Route path='/' element={<Main addToCart={hanldeAddToCart} />}/>
-      <Route path='/details/:id' element={<ProductDetails addToCart={hanldeAddToCart} />}/>
-      <Route path='/cart' element={<CartPage setCart={setCart} updateCart={updateCart} data={cart}/>}/>
-      <Route path='/signup' element={<SignUpPage/>}/>
-      <Route path='/login' element={<LoginPage/>}/> {/* New Route */}
-      <Route path="/notfound" element={<PageNotFound/>}/>
-      </Routes>
-    </div>
-    <Footer/>
-    </>
-    
->>>>>>> 004533bdc89dd97841ca523386e422d5632461c8
     </div>
   )
 }
