@@ -1,6 +1,5 @@
 import React from 'react'
 import Card from './Card'
-
 const ProductList = ({products}) => {
   return (
     <div className='flex md:grid md:grid-cols-3 flex-col sm:flex-row flex-wrap gap-5'>

@@ -6,15 +6,11 @@ import { useEffect } from "react";
 import Loading from './Loading';
 import PageNotFound from './PageNotFound';
 import { FaAngleDoubleRight, FaAngleDoubleLeft } from "react-icons/fa";
-
-const ProductDetails = ({addToCart}) => {
-
+const ProductDetails = ({addToCart, isLoggedIn}) => {
   const Id = +(useParams().id);
   const [product,setProduct] = useState();
   const [count,setCount] = useState(1);
   const [loading,setLoading] = useState(true);
- 
-
   useEffect(function(){
     const p=getProductDetail(Id);
 
@@ -25,7 +21,6 @@ const ProductDetails = ({addToCart}) => {
       setLoading(false);
     })
   },[Id]);
-  
   function handleCount(e){
     if(e.target.value < 1){
       setCount(0);
@@ -33,27 +28,21 @@ const ProductDetails = ({addToCart}) => {
     setCount(e.target.value);
     }
   }
-
   function hanldeAddToCart(){
     addToCart(product.id,count);
   }
-
   function setHandleCount(){
     setCount(1);
   }
-
-
   if(loading){
     return <div><Loading/></div>
   }
-
   if(!product){
     return <div><PageNotFound/></div>
   }
-
   return (
     <div className='class="bg-[#F4F5F6]"'>
-      <Link to="/" className='text-3xl text-[#FF5151] flex items-center gap-2 ml-8 mt-4'>
+      <Link to="/products" className='text-3xl text-[#FF5151] flex items-center gap-2 ml-8 mt-4'>
         <FiArrowLeftCircle />
       </Link>
       <div className="flex flex-col sm:flex-row mx-[20px] gap-4 px-8 py-4 bg-white sm:mx-[120px] mb-[40px] mt-[10px]">
@@ -68,9 +57,13 @@ const ProductDetails = ({addToCart}) => {
         <p className="text-[#415160]">
           {product.description}
         </p>
-        <input onChange={handleCount} value={count} type="number" placeholder='1' className='border-[1.5px] w-12 mr-1 pl-1 w-10 border-gray-400' />
-        <button onClick={hanldeAddToCart} className="bg-[#FF5151] hover:cursor-pointer border-[1px] border-[#FF5151] text-white px-4 py-1 rounded text-sm">
-          ADD TO CART
+        <input onChange={handleCount} value={count} type="number" placeholder='1' className='border-[1.5px] w-12 mr-1 pl-1 w-10 border-gray-400' disabled={!isLoggedIn} />
+        <button 
+          onClick={hanldeAddToCart} 
+          disabled={!isLoggedIn}
+          className={`${isLoggedIn ? 'bg-[#FF5151] hover:cursor-pointer hover:bg-orange-600' : 'bg-gray-400 cursor-not-allowed'} border-[1px] border-[#FF5151] text-white px-4 py-1 rounded text-sm transition duration-300 disabled:opacity-50`}
+        >
+          {isLoggedIn ? 'ADD TO CART' : 'LOGIN TO ADD TO CART'}
         </button>
       </div>
     </div>
@@ -91,5 +84,4 @@ const ProductDetails = ({addToCart}) => {
     </div>
   )
 }
-
 export default ProductDetails

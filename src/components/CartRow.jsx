@@ -2,20 +2,14 @@ import React, { useState } from 'react'
 import { RxCross2 } from "react-icons/rx";
 
 const CartRow = ({handleChange,handleRemove,cart,product}) => {
-
-
   const [noProduct, setNoProduct] = useState(cart[product.id] || 0);
-
   function onHandleRemove() {
     handleRemove(product.id);
   }
-
   function onHandleChange(e) {
     setNoProduct(+e.target.value);
     handleChange(+e.target.value, product.id);
   }
- 
-
   return (
     <div className='flex justify-between items-center bg-white py-2 px-8 border-b border-gray-200'>
       <button onClick={(e)=>{onHandleRemove(+e.target.value)}} className='w-6 hover:cursor-pointer'><RxCross2 /></button>
@@ -27,6 +21,4 @@ const CartRow = ({handleChange,handleRemove,cart,product}) => {
     </div>
   );
 };
-
-
 export default CartRow
