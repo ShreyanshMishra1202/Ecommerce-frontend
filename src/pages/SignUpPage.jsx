@@ -47,7 +47,7 @@ const SignUpPage = ({ onSignup }) => {
                   type="text"
                   id="name"
                   name="name"
-                  placeholder="Username"
+                  placeholder=""
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-[#FF5151] focus:border-[#FF5151]"
                 />
                 <ErrorMessage name="name" component="div" className="text-xs text-red-500 mt-1" />
@@ -59,7 +59,7 @@ const SignUpPage = ({ onSignup }) => {
                   type="email"
                   id="email"
                   name="email"
-                  placeholder="you@example.com"
+                  placeholder=""
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-[#FF5151] focus:border-[#FF5151]"
                 />
                 <ErrorMessage name="email" component="div" className="text-xs text-red-500 mt-1" />
@@ -71,7 +71,7 @@ const SignUpPage = ({ onSignup }) => {
                   type="password"
                   id="password"
                   name="password"
-                  placeholder="••••••••"
+                  placeholder=""
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-[#FF5151] focus:border-[#FF5151]"
                 />
                 <ErrorMessage name="password" component="div" className="text-xs text-red-500 mt-1" />
